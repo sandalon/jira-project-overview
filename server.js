@@ -1,7 +1,6 @@
 var express = require('express');
 var stylus = require('stylus');
 var nib = require('nib');
-var connect = require('connect');
 var MongoStore = require('connect-mongo')(express);
 var mongo = require('mongoose');
 
@@ -11,11 +10,12 @@ var app = express();
 var conf = {
   db: {
     db: 'projectdb',
-    host: '192.168.1.111',
+    host: 'localhost',
     port: 27017,  // optional, default: 27017
     username: 'admin', // optional
     password: 'secret', // optional
-    collection: 'mySessions' // optional, default: sessions
+    collection: 'sessions', // optional, default: sessions
+    auto_reconnect: 'true'
   },
   secret: '076ee61d63aa10a125ea872411e433b9'
 };
@@ -51,10 +51,7 @@ app.get('/', function (req, res) {
   )
 })
 
-var dbUrl = 'mongodb://localhost/projectdb';
-// dbUrl += conf.db.username+':'+conf.db.password+'@';
-//dbUrl += conf.db.host+':'+conf.db.port;
-//dbUrl += '/' + conf.db.db;
+var dbUrl = 'mongodb://localhost/projectdb?auto_reconnect=true';
 mongo.connect(dbUrl);
 mongo.connection.on('open', function () {
   app.listen(3000);

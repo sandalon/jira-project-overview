@@ -1,0 +1,16 @@
+{
+  "name": "jira-project-overview",
+  "description": "A project management interface for Jira issues",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.2.5",
+    "jade": "*",
+    "stylus": "*",
+    "nib": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "connect": "*",
+    "connect-mongo": "*"
+  }
+}

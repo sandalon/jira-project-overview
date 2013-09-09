@@ -1,15 +1,15 @@
 !!!5
 html
   head
-    title #{title} - My Site
+    title #{title}
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js')
   body
     header
-      h1 My Site
+      h1 Jira Project Overview
+      h5 A project management interface for Jira issues
     .container
       .main-content
         block content
-      .sidebar
-        block sidebar
     footer
-      p Running on node with Express, Jade and Stylus
+      p Source Available on GitHub

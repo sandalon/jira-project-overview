@@ -47,7 +47,7 @@ app.use(express.session({
 
 app.get('/', function (req, res) {
   res.render('index',
-  { title : 'Home' }
+  { title : 'Jira Project Overview' }
   )
 })
 

@@ -3,6 +3,7 @@ var stylus = require('stylus');
 var nib = require('nib');
 var MongoStore = require('connect-mongo')(express);
 var mongo = require('mongoose');
+var jiraConnect = require('./lib/jira');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(stylus.middleware(
 ))
 app.use(express.static(__dirname + '/public'))
 app.use(express.cookieParser());
+app.use(express.bodyParser());
 app.use(express.session({
     secret: conf.secret,
     maxAge: new Date(Date.now() + 3600000),
@@ -46,9 +48,21 @@ app.use(express.session({
 
 
 app.get('/', function (req, res) {
+
+
   res.render('index',
   { title : 'Jira Project Overview' }
   )
+})
+
+app.post('/validateuser', function(req, res){
+  var user = req.param("user");
+  var pass = req.param("pass");
+  var user64 = new Buffer(user + ":" + pass).toString('base64');
+  console.log(user64);
+  req.session.user = user;
+  
+  res.redirect('/');
 })
 
 var dbUrl = 'mongodb://localhost/projectdb?auto_reconnect=true';
@@ -56,3 +70,7 @@ mongo.connect(dbUrl);
 mongo.connection.on('open', function () {
   app.listen(3000);
 });
+
+jiraConnect.getProjects('zz', function(){
+    console.log('done');
+  });

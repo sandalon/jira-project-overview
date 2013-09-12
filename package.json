@@ -10,6 +10,7 @@
     "nib": "*",
     "mongodb": "*",
     "mongoose": "*",
-    "connect-mongo": "*"
+    "connect-mongo": "*",
+    "request": "*"
   }
 }

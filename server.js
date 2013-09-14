@@ -71,6 +71,6 @@ mongo.connection.on('open', function () {
   app.listen(3000);
 });
 
-jiraConnect.getProjects('zz', function(){
-    console.log('done');
+jiraConnect.getProjects('zz', function(resp){
+    //console.log(resp.body);
   });

@@ -1,6 +1,7 @@
 var assert = require('assert');
 var jira = require('../lib/jira');
 
+// change this to match an actual jira login :)
 var user = {
 	userName: 'fred.smith',
 	pass: 'password'
@@ -13,11 +14,6 @@ describe('Jira', function(){
 			
 			this.timeout(9000);
 			assert.doesNotThrow(function(){
-/*
-				var user = {
-					userName: 'fred.smith',
-					pass: 'password'
-				}*/
 
 				jira.getAuthString(user, function(auth){
 					assert.equal(auth, 'Basic ZnJlZC5zbWl0aDpwYXNzd29yZA==');
@@ -36,10 +32,6 @@ describe('Jira', function(){
 
 	describe('Get authentication header', function(){
 		it('should return the header string', function(done){
-			var user = {
-				userName: 'fred.smith',
-				pass: 'password'
-			};
 
 			this.timeout(9000);
 			assert.doesNotThrow(function(){
@@ -62,7 +54,6 @@ describe('Jira', function(){
 		it('should list projects', function(done){
 			this.timeout(9000); /* damn slow internet at sbucks */
 			assert.doesNotThrow(function(){
-
 
 				jira.getProjects(prodUser, function(resp){
 					assert.equal(resp.statusCode, 200);

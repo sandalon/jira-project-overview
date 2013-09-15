@@ -145,6 +145,26 @@ footer {
   margin: 50px auto;
   border-top: 1px dotted #ccc;
   padding-top: 5px;
+  font-family: 'Quicksand';
   font-size: 13px;
   text-align: center;
+}
+.modalDialog {
+  position: fixed;
+  font-family: 'Quicksand';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  -o-transition: opacity 400ms ease-in;
+  -ms-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
 }

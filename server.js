@@ -3,24 +3,8 @@ var stylus = require('stylus');
 var nib = require('nib');
 var MongoStore = require('connect-mongo')(express);
 var mongo = require('mongoose');
-var jiraConnect = require('./lib/jira');
 var app = express();
-
-//var db = require('db');
-
-// mongo-connect
-var conf = {
-  db: {
-    db: 'projectdb',
-    host: 'localhost',
-    port: 27017,  // optional, default: 27017
-    username: 'admin', // optional
-    password: 'secret', // optional
-    collection: 'sessions', // optional, default: sessions
-    auto_reconnect: 'true'
-  },
-  secret: '076ee61d63aa10a125ea872411e433b9'
-};
+var db = require('./db');
 
 // stylus
 function compile(str, path) {
@@ -41,16 +25,14 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.session({
-    secret: conf.secret,
+    secret: db.conf.secret,
     maxAge: new Date(Date.now() + 3600000),
-    store: new MongoStore(conf.db)
-  }));
+    store: new MongoStore(db.conf.db)
+}));
 
 var route = require('./route')(app);
 
-
-
-var dbUrl = 'mongodb://localhost/projectdb?auto_reconnect=true';
+var dbUrl = db.conf.connectionString;
 mongo.connect(dbUrl);
 mongo.connection.on('open', function () {
   app.listen(3000);
